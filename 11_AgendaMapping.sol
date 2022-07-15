@@ -41,7 +41,7 @@ contract AgendaMapping
         // Valida si el que el contacto existe, en caso de NO existir muestra el error entre " (comillas).
         require(
             contacto.valido, 
-            "El contacto NO esta registrado o NO existe"
+            "El contacto buscado NO existe"
         ); 
         
         // Retorna el contacto encontrado en la lista (MAPPING)
