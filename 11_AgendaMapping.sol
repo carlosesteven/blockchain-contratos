@@ -1,32 +1,27 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.16 <0.9.0;
 
-contract AgendaMapping {
-    
-    // Estructura de datos
+contract AgendaMapping 
+{
+    // Estructura de datos de la AGENDA
     struct Contacto {
         string nombre;
         uint telefono;
         string email;
         uint edad;
-        bool valido; // Validador
+        bool valido; // Variable Validadora
     }
-   
-    Contacto[] arrayContactos;  // Array de contactos   
 
-    mapping(uint => Contacto) mappingContactos; // Mapping de contactos   
-   
-    // Función para añadir contactos
+    // MAPPING de contactos   
+    mapping(uint => Contacto) mappingContactos; 
+
+    // Función para AGREGAR nuevos contactos
     function anadirContacto(string memory _nombre, uint _telefono, string memory _email, uint _edad) public 
     {
-        
-        // Verifica que no hay otro contacto con el mismo telefono
-        require(
-            mappingContactos[_telefono].valido == false, 
-            "Ya existe un contacto con el mismo numero de TELEFONO."
-        ); 
+        // Funcion para validar SI YA EXISTE un contaco en la lista, en caso de EXISTIR, muestra el error entre " (comillas).
+        require( mappingContactos[_telefono].valido == false, "Ya existe un contacto con el mismo numero de TELEFONO."); 
 
-        // Crea el contacto en el MAPPING de contactos del cobtrato
+        // Crea el contacto en el MAPPING de contactos del contactos
         mappingContactos[_telefono] = Contacto(
             _nombre, 
             _telefono, 
@@ -35,20 +30,21 @@ contract AgendaMapping {
             true
         );
 
-        // Agrega el contacto al ARRAY de contactos del contrato
-        arrayContactos.push(mappingContactos[_telefono]);
     }
    
-    // Función para leer contactos a partir del teléfono 
+    // Función para BUSCAR un contacto en la lista (MAPPING) de contactos
     function obtenerContacto(uint _telefono) public view returns (string memory, uint, string memory, uint) 
     {
         //  Busca el contacto en el mapping de contactos mediante el numero de telefono
         Contacto storage contacto = mappingContactos[_telefono];
         
-        // Comprobar que el contacto existe
-        require(contacto.valido, "El contacto NO esta registrado o NO existe"); 
+        // Valida si el que el contacto existe, en caso de NO existir muestra el error entre " (comillas).
+        require(
+            contacto.valido, 
+            "El contacto NO esta registrado o NO existe"
+        ); 
         
-        // Retorna el contacto encontrado
+        // Retorna el contacto encontrado en la lista (MAPPING)
         return (
             contacto.nombre, 
             contacto.telefono, 
@@ -57,9 +53,4 @@ contract AgendaMapping {
         );
     }
 
-    // Función para ver todos los contactos agregados al contrato
-    function obtenerContactos() public view returns (Contacto[] memory) 
-    {
-       return arrayContactos;
-    } 
 }
