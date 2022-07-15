@@ -12,8 +12,11 @@ contract AgendaMapping
         bool valido; // Variable Validadora
     }
 
+    // Evento que registra los nuevos libros
+    event nuevoContacto(uint telefono, string nombre);
+
     // MAPPING de contactos   
-    mapping(uint => Contacto) mappingContactos; 
+    mapping(uint => Contacto) public mappingContactos; 
 
     // Función para AGREGAR nuevos contactos
     function anadirContacto(string memory _nombre, uint _telefono, string memory _email, uint _edad) public 
@@ -30,6 +33,7 @@ contract AgendaMapping
             true
         );
 
+        emit nuevoContacto( _telefono, _nombre );
     }
    
     // Función para BUSCAR un contacto en la lista (MAPPING) de contactos
@@ -41,7 +45,7 @@ contract AgendaMapping
         // Valida si el que el contacto existe, en caso de NO existir muestra el error entre " (comillas).
         require(
             contacto.valido, 
-            "El contacto buscado NO existe"
+            "El contacto NO esta registrado o NO existe"
         ); 
         
         // Retorna el contacto encontrado en la lista (MAPPING)
