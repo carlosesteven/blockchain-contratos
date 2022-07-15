@@ -18,7 +18,7 @@ contract AgendaMapping
     // Función para AGREGAR nuevos contactos
     function anadirContacto(string memory _nombre, uint _telefono, string memory _email, uint _edad) public 
     {
-        // Funcion para validar SI YA EXISTE un contaco en la lista, en caso de EXISTIR, muestra el error entre " (comillas).
+        // Funcion para validar SI YA EXISTE un contacto en la lista, en caso de EXISTIR, muestra el error entre " (comillas).
         require( mappingContactos[_telefono].valido == false, "Ya existe un contacto con el mismo numero de TELEFONO."); 
 
         // Crea el contacto en el MAPPING de contactos del contactos
