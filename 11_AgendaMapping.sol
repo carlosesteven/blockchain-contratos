@@ -33,6 +33,7 @@ contract AgendaMapping
             true
         );
 
+        // Evento que registra los nuevos contactos
         emit nuevoContacto( _telefono, _nombre );
     }
    
