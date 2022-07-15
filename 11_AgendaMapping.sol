@@ -16,7 +16,7 @@ contract AgendaMapping
     event nuevoContacto(uint telefono, string nombre);
 
     // MAPPING de contactos   
-    mapping(uint => Contacto) public mappingContactos; 
+    mapping(uint => Contacto) mappingContactos; 
 
     // Función para AGREGAR nuevos contactos
     function anadirContacto(string memory _nombre, uint _telefono, string memory _email, uint _edad) public 
